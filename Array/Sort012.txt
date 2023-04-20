@@ -1,0 +1,40 @@
+Question - https://practice.geeksforgeeks.org/problems/sort-an-array-of-0s-1s-and-2s4231/1
+
+class Solution {
+    public void sortColors(int[] nums) {
+        int zeros = 0;
+        int ones = 0;
+        int twos = 0;
+        int n = nums.length;
+        int i =0;
+        while (i<nums.length) {
+            if (nums[i]==0) {
+                zeros++;
+            }
+            if (nums[i]==1) {
+                ones++;
+            }
+            if (nums[i]==2) {
+                twos++;
+            }
+            i++;
+        }
+
+        int x = 0;
+        while (zeros != 0) {
+            nums[x] = 0;
+            x++;
+            zeros--;
+        }
+        while (ones != 0) {
+            nums[x] = 1;
+            x++;
+            ones--;
+        }
+        while (twos != 0) {
+            nums[x] = 2;
+            x++;
+            twos--;
+        }
+    }
+}
