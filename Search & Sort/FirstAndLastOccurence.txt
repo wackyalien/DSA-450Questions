@@ -1,0 +1,63 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+
+class Main {
+
+  public static int[] searchRange(int[] nums, int target) {
+  //first occurence
+  int s = 0;
+  int e = nums.length;
+  int mid = s + (e-s)/2;
+  int[] result = new int[2];
+  int res1 = -1;
+  while(s<=e) {
+    if (nums[mid] > target) {
+      e = mid-1;
+    }
+
+    if (nums[mid] < target) {
+      s = mid+1;
+    }
+
+    if (nums[mid] == target) {
+      res1=mid;
+      e = mid-1;
+    }
+
+    mid = s + (e-s)/2;
+  }
+
+  s = 0;
+  e = nums.length;
+  mid = s + (e-s)/2;
+  int res2 = -1;
+  while(s<=e) {
+    if (nums[mid] > target) {
+      e = mid-1;
+    }
+
+    if (nums[mid] < target) {
+      s = mid+1;
+    }
+
+    if (nums[mid] == target) {
+      res2 = mid;
+      s = mid+1;
+    }
+
+    mid = s + (e-s)/2;
+  }
+  result[0] = res1;
+  result[1] = res2;
+  System.out.println(Arrays.toString(result));
+  return result;
+}
+    public static void main(String[] args) {
+
+      int[] arr = {5, 7, 7, 8, 8, 10};
+      System.out.println(Arrays.toString(searchRange(arr, 6)));
+    }
+}

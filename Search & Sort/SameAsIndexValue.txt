@@ -1,0 +1,33 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+class Main {
+
+    public static int findInVal(int[] nums) {
+    int s = 0;
+    int e = nums.length - 1;
+    int res = -1;
+    int mid = s + (e - s) / 2;
+
+    while (s <= e) {
+        if (nums[mid] == mid + 1) {
+            res = mid;
+            break;
+        } else if (nums[mid] < mid + 1) {
+            s = mid + 1;
+        } else {
+            e = mid - 1;
+        }
+        mid = s + (e - s) / 2;
+    }
+
+    return res;
+}
+    public static void main(String[] args) {
+
+      int[] arr = {0, 7};
+      System.out.println(findInVal(arr));
+    }
+}

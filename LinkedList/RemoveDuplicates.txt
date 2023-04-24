@@ -120,6 +120,6 @@ class Main {
       // System.out.println(Node.checkPalindrome());
       // System.out.println(Node.getMiddleNode());
       Node.removeDuplicates();
-      // Node.print();
+      Node.print();
     }
 }

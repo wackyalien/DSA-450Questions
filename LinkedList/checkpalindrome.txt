@@ -90,18 +90,25 @@ class Node {
     return slow;
   }
 
-  public static void removeDuplicates() {
-    Node currNode = head;
-    while(currNode != null) {
-      System.out.print(currNode.data+ " ");
-      if(currNode.next != null && currNode.data == currNode.next.data) {
-        currNode = currNode.next.next;
-      } else {
-        
-        currNode = currNode.next;
+  public static boolean checkPalindrome() {
+
+    // find middle node
+    Node middleNode = getMiddleNode();
+    // reverse node after middle node
+    Node reverseLinkedList = reverseLinkedListIteratively(middleNode.next);
+
+    // compare t1 & t2
+    while (head != null && reverseLinkedList != null) {
+
+      if(head.data != reverseLinkedList.data) {
+        return false;
       }
+      
+      head = head.next;
+      reverseLinkedList = reverseLinkedList.next;
     }
 
+    return true;
   }
 }
 class Main {
@@ -120,6 +127,6 @@ class Main {
       // System.out.println(Node.checkPalindrome());
       // System.out.println(Node.getMiddleNode());
       Node.removeDuplicates();
-      // Node.print();
+      Node.print();
     }
 }
