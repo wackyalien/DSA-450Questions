@@ -1,0 +1,42 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+class FindMinimum {
+
+  static int output = -1;
+
+  public static void getMin(Stack<Integer> s, int target) {
+
+    if (s.isEmpty()) {
+      output = target;
+      return;
+    }
+
+    int temp = s.peek();
+    s.pop();
+
+    getMin(s, temp);
+
+    if(output>target) {
+      output = target;
+    }
+
+    s.push(temp);
+  }
+}
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> s = new Stack();
+        s.push(10);
+        s.push(100);
+        s.push(0);
+        s.push(15);
+        s.push(16);
+
+        FindMinimum.getMin(s, s.peek());
+
+        System.out.println(FindMinimum.output);
+    }
+}

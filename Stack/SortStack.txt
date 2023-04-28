@@ -1,0 +1,54 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+
+class Sorted {
+
+  public static void insertSorted(Stack<Integer> stk, int target) {
+
+    if(stk.isEmpty()) {
+      stk.push(target);
+      return;
+    }
+
+    if(stk.peek() >= target) {
+      stk.push(target);
+      return;
+    }
+
+    int temp = stk.peek();
+    stk.pop();
+
+    insertSorted(stk, target);
+
+    stk.push(temp);
+  }
+
+  public static void sorted(Stack<Integer> stk) {
+
+    if(stk.isEmpty()) {
+      return;
+    }
+
+    int target = stk.peek();
+    stk.pop();
+
+    sorted(stk);
+
+    insertSorted(stk, target);
+  }
+}
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stk = new Stack();
+        stk.push(7);
+        stk.push(11);
+        stk.push(3);
+        stk.push(5);
+        stk.push(9);
+        Sorted.sorted(stk);
+        System.out.println(stk);
+    }
+}

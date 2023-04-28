@@ -1,0 +1,37 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+class Main {
+
+  public static void storeAtLast(Stack<Integer> s, int value) {
+
+    if(s.size() == 0) {
+      s.push(value);
+      return;
+    }
+
+    int temp = s.peek();
+    s.pop();
+
+    storeAtLast(s, value);
+
+    s.push(temp);
+  }
+    public static void main(String[] args) {
+        Stack<Integer> s = new Stack();
+
+        s.push(5);
+        s.push(15);
+        s.push(27);
+        s.push(32);
+        s.push(11);
+
+        int target = s.peek();
+        s.pop();
+        storeAtLast(s, target);
+
+        System.out.println(s);
+    }
+}
