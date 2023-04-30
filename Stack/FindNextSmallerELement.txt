@@ -1,0 +1,36 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+class NextSmallerElement {
+
+  public static int[] findNextSmaller (int[] input, int n) {
+
+    Stack<Integer> s = new Stack();
+    s.push(-1);
+    int[] result = new int[n];
+    for (int i = input.length-1; i>=0; i--) {
+      int temp = input[i];
+      boolean b = true;
+      while (b) {
+        if(temp > s.peek()) {
+          result[i] = s.peek();
+          s.push(temp);
+          b = false;
+        } else {
+          s.pop();
+        }
+      }
+    }
+    return result;
+  }
+}
+class Main {
+    public static void main(String[] args) {
+        int[] inputs = {13, 7, 6, 12};
+        int n = inputs.length;
+        // System.out.println(NextSmallerElement.findNextSmaller(inputs, n));
+        System.out.println(Arrays.toString(NextSmallerElement.findNextSmaller(inputs, n)));
+    }
+}
