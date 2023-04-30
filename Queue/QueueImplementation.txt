@@ -1,0 +1,93 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+
+class Queue {
+
+  static int front;
+  static int rear;
+  static int max = 5;
+  static int[] arr = new int[max];
+
+  Queue() {
+    this.front = 0;
+    this.rear = 0;
+  }
+
+  public static void push(int data) {
+
+    if (rear == max) {
+      System.out.println("Queue overflow");
+    } else {
+      arr[rear++] = data;
+    }
+  }
+
+  public static void pop() {
+
+    if (front == rear) {
+      System.out.println("Empty Queue");
+    } else {
+      front++;
+
+      if(front == rear) {
+        front = 0;
+        rear = 0;
+      }
+    }
+  }
+
+  public static void getFront() {
+
+    if (front == rear) {
+      System.out.println("Empty Queue");
+    } else {
+      System.out.println(arr[front]);
+    }
+  }
+
+  public static void isEmpty() {
+
+    if (front == rear) {
+      System.out.println(true);
+    } else {
+      System.out.println(false);
+    }
+  }
+
+  public static void getSize() {
+
+    System.out.println(rear-front);
+  }
+}
+class Main {
+    public static void main(String[] args) {
+        Queue q = new Queue();
+
+        q.isEmpty();
+        q.getSize();
+
+        q.push(5);
+        q.push(10);
+        q.push(15);
+        q.push(20);
+        q.push(25);
+        q.getSize();
+
+        q.isEmpty();
+
+        q.getFront();
+
+        q.pop();
+        q.pop();
+        q.pop();
+        q.pop();
+        q.pop();
+        q.push(25);
+        q.getSize();
+
+        q.getFront();
+    }
+}

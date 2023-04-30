@@ -1,0 +1,95 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+class AreaOfHistogram {
+
+  public static void getArea(int[] inputs, int n) {
+
+    int[] prev = findPrevSmaller(inputs, n);
+    int[] next = findNextSmaller(inputs, n);
+
+    int maxArea = 0;
+    for (int i = 0; i<next.length; i++) {
+      if (next[i] == -1) {
+        next[i] = n;
+      }
+
+      int area = inputs[i] * (next[i]-prev[i]-1);
+      maxArea = Math.max(area, maxArea);
+    }
+
+    System.out.println(maxArea);
+   
+  }
+
+  public static int[] findPrevSmaller (int[] inputs, int n) {
+
+    Stack<Integer> s = new Stack();
+    s.push(-1);
+    int[] result = new int[n];
+
+    for (int i = 0; i<inputs.length; i++) {
+      int temp = inputs[i];
+
+      boolean b = true;
+
+      while (b) {
+
+        if (s.peek() == -1) {
+          result[i] = -1;
+          s.push(i);
+          b = false;
+          continue;
+        }
+
+        if (temp>inputs[s.peek()]) {
+          result[i] = s.peek();
+          s.push(i);
+          b = false;
+        } else {
+          s.pop();
+        }
+      }
+    }
+
+    return result;
+  }
+
+  public static int[] findNextSmaller (int[] input, int n) {
+
+    Stack<Integer> s = new Stack();
+    s.push(-1);
+    int[] result = new int[n];
+    for (int i = input.length-1; i>=0; i--) {
+      int temp = input[i];
+      boolean b = true;
+      while (b) {
+
+        if (s.peek() == -1) {
+          result[i] = -1;
+          s.push(i);
+          b = false;
+          continue;
+        }
+
+        if(temp > input[s.peek()]) {
+          result[i] = s.peek();
+          s.push(i);
+          b = false;
+        } else {
+          s.pop();
+        }
+      }
+    }
+    return result;
+  }
+}
+class Main {
+    public static void main(String[] args) {
+      int[] input = {2, 1, 5, 6, 2, 3};
+      int n = input.length;
+      AreaOfHistogram.getArea(input, n);
+    }
+}
