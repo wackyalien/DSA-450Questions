@@ -1,0 +1,54 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+
+class CelebrityProblem {
+
+  public static void solve(int[][] arr) {
+
+    Stack<Integer> stk = new Stack();
+
+    for(int i = 0; i<arr.length; i++) {
+      stk.push(i);
+    }
+
+    while(stk.size() > 1) {
+      int a = stk.pop();
+      int b = stk.pop();
+
+      if(arr[a][b] == 1) {
+        stk.push(b);
+      } else {
+        stk.push(a);
+      }
+    }
+
+    if (!stk.isEmpty()) {
+      int ans = possibleCandidate(stk.pop(), arr);
+      System.out.println(ans);
+    }
+  }
+
+  public static int possibleCandidate(int val, int[][] arr) {
+
+    int ans = -1;
+    for(int i = 0; i<arr.length; i++) {
+      
+      if (arr[val][i] != 0) {
+        return ans;
+      }
+    }
+
+    return val;
+  }
+}
+class Main {
+    public static void main(String[] args) {
+
+      int[][] arr = {{0, 0, 1, 0}, {0, 0, 1, 0}, {0, 1, 0, 0}, {0, 0, 1, 0}};
+
+      CelebrityProblem.solve(arr);
+    }
+}

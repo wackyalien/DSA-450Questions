@@ -1,0 +1,43 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+
+class MinimumBrackerReversal {
+
+  public static int bracket(String s) {
+
+    Stack<Character> stk = new Stack();
+    int res=0;
+    for(int i =0; i<s.length(); i++) {
+      
+      char c = s.charAt(i);
+
+      if(c=='{') {
+        stk.push(c);
+      } else {
+
+        if(stk.isEmpty()) {
+          stk.push('{');
+          res++;
+        } else {
+          stk.pop();
+        }
+      }
+    }
+
+    if(stk.size() %2 != 0) {
+      return -1;
+    }
+
+    res = res + stk.size()/2;
+    return res;
+  }
+}
+class Main {
+    public static void main(String[] args) {
+        String s = "{{{{";
+        System.out.println(MinimumBrackerReversal.bracket(s));
+    }
+}

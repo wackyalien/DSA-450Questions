@@ -1,0 +1,40 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+class RemoveAdjacent {
+
+  public static String remove(String s) {
+
+    Stack<Character> stk = new Stack();
+    for (int i = 0; i<s.length(); i++) {
+
+      char c = s.charAt(i);
+
+      if (stk.isEmpty()) {
+        stk.push(c);
+      } else {
+
+        if (stk.peek() == c) {
+          stk.pop();
+        } else {
+          stk.push(c);
+        }
+      }
+    }
+
+    String res = "";
+    while(!stk.isEmpty()) {
+      res = stk.pop() + res;
+    }
+
+    return res;
+  }
+}
+class Main {
+    public static void main(String[] args) {
+        String s = "abbaca";
+        System.out.println(RemoveAdjacent.remove(s));
+    }
+}
