@@ -1,0 +1,50 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+import java.util.Scanner;
+
+class Main {
+  public static void main(String[] args) {
+    Scanner input = new Scanner(System.in);
+    System.out.println("Enter root node data :: ");
+
+    int rootNode = input.nextInt();
+
+    Node root = Node.buildTree(rootNode);
+  }
+}
+
+class Node {
+
+  int data;
+  Node left;
+  Node right;
+
+  Node(int data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+
+  public static Node buildTree(int data) {
+
+    if (data == -1) {
+      return null;
+    }
+
+    Node root = new Node(data);
+
+    Scanner input = new Scanner(System.in);
+
+    //left node
+    System.out.println("Enter left node :: ");
+    int leftNode = input.nextInt();
+    root.left = buildTree(leftNode);
+    //right node
+    System.out.println("Enter right node :: ");
+    int rightNode = input.nextInt();
+    root.right = buildTree(rightNode);
+
+    return root;
+  }
+}
