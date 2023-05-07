@@ -1,0 +1,18 @@
+class Solution{
+    public void toSumTree(Node root){
+         root.data = sumTree(root);
+    }
+    
+    public static int sumTree(Node root) {
+
+        if(root == null) {
+          return 0;
+        }
+    
+        int leftNode = sumTree(root.left);
+        int rightNode = sumTree(root.right);
+        
+        root.data = leftNode + rightNode;
+        return root.data;
+    }
+}

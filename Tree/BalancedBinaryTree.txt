@@ -1,0 +1,36 @@
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        
+        if(root == null) {
+            return true;
+        }
+
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+
+        int absDifference = Math.abs(leftHeight-rightHeight);
+
+        boolean leftBalanced = isBalanced(root.left);
+        boolean rightBalanced = isBalanced(root.right);
+
+        if(absDifference<=1 && leftBalanced && rightBalanced) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static int height(TreeNode root) {
+
+        if(root == null) {
+            return 0;
+        }
+
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+
+        int ans = 1 + Math.max(leftHeight, rightHeight);
+
+        return ans;
+    }
+}
