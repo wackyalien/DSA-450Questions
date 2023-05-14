@@ -1,0 +1,57 @@
+class Solution
+{
+    //Function to return a list containing the bottom view of the given tree.
+    public ArrayList <Integer> bottomView(Node root)
+    {
+        // Code here
+        Map<Integer,Integer> map = bottomNotch(root);
+        
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        for(int key : map.keySet()) {
+            
+            list.add(map.get(key));
+        }
+        
+        return list;
+    }
+    
+    public static Map<Integer,Integer> bottomNotch(Node root) {
+        
+        Queue<Pair> q = new LinkedList<>();
+        
+        Map<Integer, Integer> map = new TreeMap<>();
+        
+        q.add(new Pair(root, 0));
+        
+        while(!q.isEmpty()) {
+            
+            Pair temp = q.remove();
+            
+            map.put(temp.level, temp.node.data);
+            
+            
+            if(temp.node.left != null) {
+                
+                q.add(new Pair(temp.node.left, temp.level-1));
+            }
+            
+            if(temp.node.right != null) {
+                
+                q.add(new Pair(temp.node.right, temp.level+1));
+            }
+        }
+        
+        return map;
+    }
+}
+
+class Pair {
+    Node node;
+    Integer level;
+    
+    Pair(Node node, Integer level) {
+        this.node = node;
+        this.level = level;
+    }
+}w

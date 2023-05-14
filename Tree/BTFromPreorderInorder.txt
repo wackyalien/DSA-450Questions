@@ -1,0 +1,38 @@
+class Solution {
+
+    static int preIndex = 0;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        
+        preIndex = 0;
+        TreeNode root = buildTreeUsingInorderPreOrder(inorder, preorder, inorder.length, 0, inorder.length-1);
+
+        return root;
+    }
+
+    TreeNode buildTreeUsingInorderPreOrder(int[] inOrder, int[] preOrder, int size, int startIndex, int endIndex) {
+
+        if(preIndex > size || startIndex>endIndex) {
+            return null;
+        }
+
+        int preData = preOrder[preIndex++];
+        TreeNode node = new TreeNode(preData);
+        // find position
+        int pos = findPosition(inOrder, size, preData);
+        node.left = buildTreeUsingInorderPreOrder(inOrder, preOrder, size, startIndex, pos-1);
+        node.right = buildTreeUsingInorderPreOrder(inOrder, preOrder, size, pos+1, endIndex);
+
+        return node;
+    }
+
+    public static int findPosition(int[] inOrder, int size, int preData) {
+
+        for(int i = 0; i <= inOrder.length; i++) {
+            if(inOrder[i] == preData) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+}
