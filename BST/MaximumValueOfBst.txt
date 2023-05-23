@@ -1,0 +1,173 @@
+import java.util.*;
+import java.util.Scanner;
+
+class Main {
+  public static void main(String[] args) {
+
+    Node root = null;
+    root = Node.takingInput(root);
+
+    // Node.levelOrderTraversal(root);
+
+    // Node.inOrder(root);
+    // System.out.println();
+    // Node.preOrder(root);
+    // System.out.println();
+    // Node.postOrder(root);
+
+    // Node searchNode = Node.searching(root, 500);
+    // System.out.println(searchNode.data);
+
+    int mini = Node.Maximum(root);
+    System.out.println(mini);
+  }
+}
+
+class Node {
+
+  int data;
+  Node left;
+  Node right;
+
+  Node(int data) {
+    this.data = data;
+    this.left = null;
+    this.right = null;
+  }
+
+  public static Node buildBST(Node root, int target) {
+
+    if(root == null) {
+      root = new Node(target);
+      return root;
+    }
+
+    if(root.data > target) {
+      root.left = buildBST(root.left, target);
+    }
+
+    if(root.data < target) {
+      root.right = buildBST(root.right, target);
+    }
+
+    return root;
+  }
+
+  public static Node takingInput(Node root) {
+    
+    Scanner input = new Scanner(System.in);
+    System.out.println("Input data");
+    int data = input.nextInt();
+    
+    while(data != -1) {
+      
+      root = buildBST(root, data);
+      System.out.println("Input data");
+      data = input.nextInt();
+    }
+
+    input.close();
+    return root;
+  }
+
+  public static void levelOrderTraversal(Node root) {
+
+    Queue<Node> q = new LinkedList<>();
+
+    q.add(root);
+    q.add(null);
+
+    while(!q.isEmpty()) {
+
+      Node temp = q.remove();
+
+      if(temp == null) {
+
+        System.out.println();
+        if(!q.isEmpty()) {
+          q.add(null);
+        }
+      } else {
+        System.out.print(temp.data + " ");
+
+        if(temp.left != null) {
+          q.add(temp.left);
+        }
+  
+        if(temp.right != null) {
+          q.add(temp.right);
+        }
+      }
+    }
+  }
+
+  public static void inOrder(Node root) {
+
+    if(root == null) {
+      return;
+    }
+
+    inOrder(root.left);
+    System.out.print(root.data + " ");
+    inOrder(root.right);
+  }
+
+  public static void preOrder(Node root) {
+
+    if(root == null) {
+      return;
+    }
+
+    System.out.print(root.data + " ");
+    inOrder(root.left);
+    inOrder(root.right);
+  }
+
+  public static void postOrder(Node root) {
+
+    if(root == null) {
+      return;
+    }
+
+    inOrder(root.left);
+    inOrder(root.right);
+    System.out.print(root.data + " ");
+  }
+
+  public static Node searching(Node root, int target) {
+
+    if(root == null) {
+      return null;
+    }
+
+    if(root.data == target) {
+      return root;
+    } else if(root.data < target) {
+      return searching(root.right, target);
+    } else {
+      return searching(root.left, target);
+    }
+  }
+
+  public static int Minimum(Node root) {
+
+    Node temp = root;
+
+    while(temp.left != null) {
+      temp = temp.left;
+    }
+
+    return temp.data;
+  }
+
+  public static int Maximum(Node root) {
+
+    Node temp = root;
+
+    while(temp.right != null) {
+      temp = temp.right;
+    }
+
+    return temp.data;
+  }
+}

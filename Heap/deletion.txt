@@ -1,0 +1,94 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+class Main {
+    public static void main(String[] args) {
+        // System.out.println("Hello world!");
+        Heap h = new Heap();
+        h.arr[0] = -1;
+        h.arr[1] = 100;
+        h.arr[2] = 50;
+        h.arr[3] = 60;
+        h.arr[4] = 30;
+        h.arr[5] = 40;
+        h.arr[6] = 45;
+        h.arr[7] = 55;
+        h.arr[8] = 10;
+        h.arr[9] = 20;
+        h.size = 9;
+
+        System.out.println("Before insertion = "+Arrays.toString(h.arr));
+        // h.insert(-1);
+        // h.insert(100);
+        // h.insert(50);
+        // h.insert(60);
+        // h.insert(30);
+        // h.insert(40);
+        h.deletion();
+        System.out.println("After insertion = "+Arrays.toString(h.arr));
+    }
+}
+
+class Heap {
+
+  int[] arr = new int[11];
+  int size;
+
+  Heap() {
+    this.size = 0;
+  }
+
+  void insert(int value) {
+
+    size++;
+    int index = size;
+    arr[index] = value;
+
+    while(index>1) {
+
+      int parent = index/2;
+
+      if (arr[parent]<arr[index]) {
+        int temp = arr[parent];
+        arr[parent] = arr[index];
+        arr[index] = temp;
+        index = parent;
+      } else {
+        break;
+      }
+    }
+
+  }
+
+  void deletion() {
+
+    arr[1] = arr[size];
+    size--;
+
+    int i = 1;
+    while (i<size) {
+
+      int leftIndex = 2*i;
+      int rightIndex = 2*i+1;
+      int largestElement = i;
+      if(leftIndex<size && arr[i]<arr[leftIndex]) {
+        largestElement = leftIndex;
+      }
+
+      if(rightIndex<size && arr[i]<arr[rightIndex]) {
+        largestElement = rightIndex;
+      }
+
+      if(arr[largestElement] == arr[i]) {
+        break;
+      } else {
+        int temp = arr[i];
+        arr[i] = arr[largestElement];
+        arr[largestElement] = temp;
+        i = largestElement;
+      }
+    }
+  }
+}

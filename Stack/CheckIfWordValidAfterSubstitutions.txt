@@ -1,0 +1,54 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+// The main method must be in a class named "Main"
+class CheckWord {
+
+  public static boolean valid (String s) {
+
+    Stack<Character> stk = new Stack();
+    
+    for (int i = 0; i<s.length(); i++) {
+
+      char c = s.charAt(i);
+
+      if (c != 'c') {
+        stk.push(c);
+      } else {
+
+        if (stk.empty()) {
+          continue;
+        }
+        char a = stk.pop();
+
+        if (stk.empty()) {
+          stk.push(a);
+          continue;
+        }
+        char b = stk.pop();
+        String temp = ""+a+b+c;
+        if (temp.equals("bac")) {
+          continue;
+        } else {
+          stk.push(b);
+          stk.push(a);
+          stk.push(c);
+        }
+      }
+    }
+
+
+    if(stk.isEmpty()) {
+      return true;
+    }
+
+    return false;
+  }
+}
+class Main {
+    public static void main(String[] args) {
+        String s = "abccba";
+        System.out.println(CheckWord.valid(s));
+    }
+}

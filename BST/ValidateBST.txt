@@ -1,0 +1,23 @@
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        
+        Long lb = Long.MIN_VALUE;
+        Long ub = Long.MAX_VALUE;
+        return solve(root, lb, ub);
+    }
+
+    public static boolean solve(TreeNode root, Long lb, Long ub) {
+
+        if(root == null) {
+            return true;
+        }
+
+        if(root.val > lb && root.val < ub) {
+            boolean leftNode = solve(root.left, lb, new Long(root.val));
+            boolean rightNode = solve(root.right, new Long(root.val), ub);
+            return leftNode && rightNode;
+        } else {
+            return false;
+        }
+    }
+}
